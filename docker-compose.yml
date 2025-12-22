@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    image: simple_redis_stream_event_listener
+    build: .
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    

@@ -1,0 +1,3 @@
+vendor
+.env
+simple_redis_stream_event_listener
