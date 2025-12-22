@@ -18,14 +18,14 @@ sudo docker compose up --no-deps -d
 ## Sender redis-cli
 
 ```bash
- XADD redisevent MAXLEN ~ 1000 * status "1" description "desc" action "status" 
+ XADD eventName MAXLEN ~ 1000 * status "1" description "desc" action "status" 
 ```
 
 ## Sender with go
 
 ```go
 errs := redis.XAdd(context.Background(), &redis.XAddArgs{
-		Stream: "tshd_event_stream",
+		Stream: "eventName",
 		MaxLen: 5000,
 		Values: map[string]interface{}{
 			"status": 1,
