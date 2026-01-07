@@ -25,17 +25,17 @@ sudo docker compose up --no-deps -d
 
 ```go
 errs := redis.XAdd(context.Background(), &redis.XAddArgs{
-		Stream: "eventName",
-		MaxLen: 5000,
-		Values: map[string]interface{}{
-			"status": 1,
-			"description":     time.Now().UTC(),
-			"action":     "status",
-		},
-	}).Err()
-	if errs != nil {
-		fmt.Println(errs)
-	}
+    Stream: "eventName",
+    MaxLen: 5000,
+    Values: map[string]interface{}{
+        "status": 1,
+        "description":     time.Now().UTC(),
+        "action":     "status",
+    },
+}).Err()
+if errs != nil {
+    fmt.Println(errs)
+}
 
 ```
 

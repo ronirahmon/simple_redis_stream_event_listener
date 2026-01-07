@@ -6,9 +6,9 @@ import (
 
 var redisClient *redis.Client
 
-func NewRedisClient() error {
+func NewRedisClient(host string) error {
 
-	redis_opt, err := redis.ParseURL(GetConfig().Redis.Host)
+	redis_opt, err := redis.ParseURL(host)
 	if err != nil {
 		return err
 	}

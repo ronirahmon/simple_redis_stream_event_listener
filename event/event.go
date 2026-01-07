@@ -34,11 +34,17 @@ type Event struct {
 	Firebase      *firebase.App
 }
 
+type EventConfig struct {
+	RedisHost     string
+	StreamSubject string
+	ConsumerGroup string
+}
+
 type HandlerFunc func(c context.Context) error
 
-func New() *Event {
+func New(config *EventConfig) *Event {
 
-	err := utils.NewRedisClient()
+	err := utils.NewRedisClient(config.RedisHost)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -47,8 +53,8 @@ func New() *Event {
 
 	return &Event{
 		Redis:         utils.GetRedisClient(),
-		StreamSubject: utils.GetConfig().Redis.StreamSubject,
-		CusumerGroup:  utils.GetConfig().Redis.StreamConsumeGroup,
+		StreamSubject: config.StreamSubject,
+		CusumerGroup:  config.ConsumerGroup,
 		keyFunc:       map[string]HandlerFunc{},
 	}
 }

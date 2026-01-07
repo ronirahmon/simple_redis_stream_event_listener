@@ -39,7 +39,11 @@ func main() {
 
 	h := handlers.Handler{}
 
-	e := event.New()
+	e := event.New(&event.EventConfig{
+		RedisHost:     utils.GetConfig().Redis.Host,
+		StreamSubject: utils.GetConfig().Redis.StreamSubject,
+		ConsumerGroup: utils.GetConfig().Redis.StreamConsumeGroup,
+	})
 	e.AddEvent("status", h.ChangeStatusEvent)
 
 	e.Start()
